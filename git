@@ -1,0 +1,325 @@
+Open an developer command prompt and run as adminstrator (user1)
+d: ------------------going to d drive
+md deops22 ----------creating  deops22 folder in d drive
+cd deops22 ----------going to deops22 folder
+md gitdemo ----------crreating gitdemo folder
+dir -----------------see details
+dotnet new sln -o HelloWorldApp ----in this folder we are creating a sample dotnet core project.
+cd HelloWorldApp -------go to this project
+dotnet new mvc -n HelloWorldApp.Web ------in this project we are creating a asp.net core web project.
+dotnet sln HelloWorldApp.sln add HelloWorldApp.Web\HelloWorldApp.Web.csproj ------project and solution are independent so merge them.
+dotnet dev-certs https --trust ------creating a ssl trust layer
+cd HelloWorldApp.Web  ---going into web application
+dir -----------
+cls -------clear
+dotnet build -------build web app
+cls ---------
+dotnet run  -----run web app ( after you got a url in command prompt , copy and paste in any browser and see  asp.net core wweb app)
+clt plus c -----exit web app
+dir --------
+git init -----------crates a  new git repoistory (used for intilization)
+git status -------- check status
+git add . ----- addding a file to the staging state
+git status ------
+dir --------
+code . ------------edit web app in vs code editor ( now go to hellowworld web app, select views, select home, select index.cshtml, go to 6 th line write welcome to git and save.)
+git status --------
+git add . ------stage file index.cshtml
+git status --------
+git commit -m"edited welcome" ------update file
+git status ------
+git log -------- see time , email... etc
+code . --------- (1.goto extensions, 2.type "gitignore" and install 3.Press F1 , search "add gitignore" (red symbol), select and enter 4. And again search "visualstudio.ignore" select and enter.
+git add . --------
+git commit -m"git ignore update" ----------
+dir ----
+git status -----------
+(still now we are worked iin local repository and now update in azure repository)
+1.Go to azure devops -Files -Repos - ( Saw )- Push an existing repository from command line and Clone to your computer
+2. Go to Clone to your computer and click generate credentials
+3. Go to Push an existing repository from command line  - copy commands and paste in command prompt.
+4. Enter credentials and after uplodaed refresh page in azure devops.
+5.Now open an another command prompt and run as adminstrator (user2)
+d:
+md devo
+cd devo
+md user2
+cd user2
+dir
+Now got to azure repos , files, click clone and copy url 
+git clone "url"
+git status
+dir
+cd HelloWorldApp.Web
+git log ------------the  logs which are commited in user1 , see in user 2 cp.
+Now go to user1 cp
+code . ------------edit web app in vs code editor ( now go to hellowworld web app, select views, select home, select index.cshtml, go to 6 th line write welcome to git user1 and save.)
+git status --------
+git add . ------stage file index.cshtml
+git status --------
+git commit -m"edited welcome to git user1" ------update file
+git push origin master -----update to master git
+6.Now go to azure  devops repos and see index.cshtml
+Now go to user2 cp
+git pull origin master
+code . ------------ see, user 1 code synchrnoized with user 2 code.
+Branches- ( locally )
+Now user group user 1 cp
+cd ..
+git pull origin master
+git branch -l -------checking which brach currently
+git branch feature1 ---------create a feature branch
+git checkout feature1 --------switch to feature branch
+dir
+git status
+code . --------Edit the Code in Index.html
+git add .
+git commit -m "feature1"
+git checkout master
+git merge feature1 --------merging feature branch with master branch
+git push origin master
+Branches (Local to remote and Pull Requests )
+git branch -----see no of branches
+git branch feature/edit-home-title
+git checkout feature/edit-home-title
+code . --------edit web app in vs code editor ( now go to hellowworld web app, select views, select home, put this code in 9 th line i,e <div>This is new feature</div>)
+git add .
+git commit -m "Some Comment"
+git push origin feature/edit-home-title
+GO to the Azure repos and navigate to feature branch "edit-home-title"
+Click on "Create a Pull Request"
+Provide title and description and click on Create
+Add reviwers-( mandatory and optional)
+Now login as the reviewer (email id given while creating pull request)
+Now navigate to Pull requests from Left side menu and click on displayed Pull request. 
+Navigate to Files tab and review the code changes…
+Now click on the pull requests and check the code changes and we can approve it or reject it.
+The suggestions can be made in discussion board. Once we are done. We can approve the request.
+Once approved. We can complete the merger in the by clicking Complete  Provide the required details
+ Complete merge
+Note that the branch edit-home-title is deleted and changes are now reflected in master branch.
+Step3: Fetch the latest code from the remote repository and merges it into your local repository and delete the
+local feature branch
+git checkout master
+git pull origin master
+git branch -d feature1 ---delete  local feature branch
+Branch Policies (test)
+Set branch policies
+git branch
+delete all feature branches (Ex- git branch -d brancname )
+Git checkout master
+git pull origin master
+git checkout -b bugfix------create and switch to branch 'bugfix/home-page-typo'
+code .
+Edit the Index.cshtml 
+git add .
+git commit -m "Fixed home page content"
+                   
+                      If authentication failed you got , it means conection dis-conected b/w org and a.d
+                      git remote add origin  url (url find in clone,in azure repos file)--conect a conection org and a.d
+                      git remote remove origin -disconect 
+                      see concept credential  manager -9min in video.
+                    
+          git remote  add origin url ---now conected
+
+git push origin bugfix
+Go to DevOps and  Create a pull request
+Add reviewers, after approves, click pull request with sqaush commit (see pic1) and complete merge
+Now see click commits in azure repos
+Squash mege - (2 or more commits can merge at one place and it become a single commit)
+
+
+Recovering a deleted branch
+
+git branch
+git checkout master
+git branch -d bugfix --- (then you wll get in cp i,e If you are sure you want to delete it, run 'git branch -D bugfix'.)
+git branch -D bugfix
+git reflog --------list all branches, deleted also and select branch which you want recover
+git checkout -b selectedbranch
+git branch
+git log
+Now go to branches in portal
+Delete all feature branches except master branch
+Create a demo branch based oon master
+edit code index.cshtml
+And create a pull request as a draft of pull request --See pic 2 (draft pull request means no approvers permision, no voting, no validation policy automatically run  it means we run pipeline manualy)
+Revert a pull request
+
+Go to pullrequests -  click complted- select your pull request - click revert (just see only)
+
+Selecting default branch
+
+Go to project settingd - repositiories - select repository - select branches - click you want branch set as main branch by clicking "..." and set as defualt branch.
+Master is for production.
+Under master we have dev branch
+under dev we have topic branchh.
+
+Note - Close all
+
+Start from fresh
+
+git 
+
+github ---------see repository, people (users)
+
+azure repos
+                     
+-- All above 3 by microsoft
+-- Upload an website in github
+-- Github, bikbucket is the ui of git.
+
+Merge conflicts:-
+
+Note - When ew have branch policy on master, then we can't push commits into master origin from local master.Commits possible through pr only.
+
+Open notepad and wrrite some thing and save it.
+Upload to github
+
+Open two developer command prompts  cp1 and cp2 (run as adminstrator)
+
+cp1                                     cp2
+
+md user1                   		md user2
+cd user1                   		cd user2
+git init                   		git init 
+go to github , click clone 		and copy url by clicking ractangle cart symbol.
+git remote add origin url  		git remote add origin url  
+
+open notepad of user1
+change content
+git add .
+git commit -m"update"
+git push origin master
+                                        open notepad of user2
+				        change content
+					git add .
+					git commit -m"update"
+					git push origin master (then you will got these merge conflict)
+                                         
+
+! [rejected]        master -> master (fetch first)
+error: failed to push some refs to 'https://github.com/brsconsultancyservice/gitcon.git'
+hint: Updates were rejected because the remote contains work that you do
+hint: not have locally. This is usually caused by another repository pushing
+hint: to the same ref. You may want to first integrate the remote changes
+hint: (e.g., 'git pull ...') before pushing again.
+
+
+Solution:-                               
+                                
+                                        git pull origin master ---------(first get remote commits to local)
+					git log
+                                        git add .
+                                        git commit -m"update"
+                                        git push origin master
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+Now what if 2 users working on same line (by manualy delete)
+
+
+cp1                                      cp2
+git pull origin master                   git pull origin master
+git log                                  git log
+change content in notepad 1 and save
+git add .
+git commit -m"update csharp22"
+git push origin master
+                                         change content what you changed in notepad 1 in notepad 2 and save
+				         git add .
+					 git commit -m"update csharp22"
+					 git push origin master           ----then we get ! [rejected]        master -> master (fetch first)
+                                         git pull origin master           ----CONFLICT (content): Merge conflict in class1.docx, but last time we don't got this msg.
+                                         solution:- delete content on either user1 or user2 of same line (in vs editor it shows colours) i,e your choice commited, on notedpad
+                                         git add .
+                                         git commit -m"update"
+                                         git push origin master
+Azure Rebase for resolving conflicts
+Upload an webapp to azure Repos
+cp1                                  cp2
+d:
+md maydevops
+cd maydevops
+cd HelloworldApp
+git pull origin master
+git log
+cls				
+code .
+change weclome to user1 in index.cshtml
+git add .
+git commit -m"update"
+git push origin master
+					code .
+					weclome to user2
+					git add .
+					git commit -m"update"
+					git push origin master (then rejected)
+                                        git pull --rebase origin master  --------all commits on the server are pulled and rebased with to that nrew branch, but it failed to merge so
+                                        code .
+                                        Remove user 1 manualy
+                               		git add .
+ git commit -m "Update				
+ git rebase --continue 					
+ git status					
+ git push origin master 
+git pull origin master
+git log					git log
+-------------------------------------------------------------------------------------------------------------------
+Copy commits from one branch to another using cherry-pick. Unlike a merge or rebase, cherry-pick only brings the
+changes from the commits you select, instead of all the changes in a branch.
+Cherry-pick is a great way to tackle these common problems:
+Accidentally committing on the wrong branch. Cherry-pick the change(s) over to the correct branch and
+then reset the original branch to the previous commit.
+Pulling out a set of commits made in a feature branch so you merge them back to your master branch
+sooner
+Cherry Picking:- If you have many items,then pick up  one good item and don't bother about rest. In this way has name come i,e cherry picking.                
+When ever we have to change others then we have 2 options i,e pull or merge but all changes are applied to current branch
+Many times we don't want interst changes in others.i,e i dont't want to take all commits to apply.
+So only one specific commit i would like to take and apply to my current branch and continue.
+See diagram in notes in last page of git
+Advantage of cherry pick is revert the branch.
+Go to another portal i,e user1
+Create Hellow world app
+Do commits in index.cs html- welcome to bug and in 6th line write some content in paragraph in the privacy.cshtml 
+Do one morecommit on index.cshtml
+Create a new dev branch based on master branch. and edit dev branch change code in index.cs i,e weclome to bug .....
+Now go to Privacy.cshtml and change code in 6 th line and commit.
+Still now we will do multiple commits
+Delete dev branch and go to master branch and go to index.cshtml and chnage code in 7th line i,e Welcome to bug2 and commit.
+see commits
+git pull origin master 
+code .
+Add a paragraph in index.html in 11 th line i,e <p> changes in local file </p>
+git add .
+git commit -m"update"
+dotnet build
+go to azure repos and introduce some  error in program.cs lie remove main method
+git pull origin master
+dotnet build
+see we got an error ( because we introduced a bug in program.cs)
+Now add main and resolve solution
+git remote add hotfix <url of repo>
+git fetch hotfix ------------we are going to get history of hotfix
+git log hotfix/master
+select commit code which you want cherry pick and copy (Ex- 3f3d5b163d1f207c1efdd259b2ee6e4ed9aa56dd i,e sha1 )
+git log
+cls
+git cherry-pick <put commit code number i,e SHA1 (SHA Means unique id)>    
+dotnet build
+see build succed
+Note- fetch + merge
+Reset and revert
+Git reset - discard staged commmited( not commited only staged) and bacK to its previous commited.
+
+
+
+
+
+
+
+
+
+
