@@ -1,0 +1,30 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+    ],
+    "content-hash": "9d46c3f14e487b331a2614b6e2f72ad5",
+    "packages": [
+        {
+            "name": "monolog/monolog",
+            "version": "1.27.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Seldaek/monolog.git",
+                "reference": "fcb6d75d33493df6d6e9c1f9e01fba77f930880f"
+            },
+            // ...
+        },
+        {
+            "name": "symfony/console",
+            "version": "v5.4.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/console.git",
+                "reference": "a0c7f14f3ebacbe79c474d09c63c040b20873c3a"
+            },
+            // ...
+        }
+    ],
+    // ...
+}
